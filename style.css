@@ -11,6 +11,7 @@ body {
     background-color: aquamarine;
 }
 #display{
- 
+    display:flex;
+    flex-direction:column;
     padding: 100px;
 }
