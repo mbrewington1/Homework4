@@ -8,29 +8,32 @@ $('#add').on('click', function(){
 
 });
 
+//A `View` option that displays all employee info
 $("#view").on('click', function(){
     $('#dashboard').empty();
     employeeList.forEach(e =>{
         $('#dashboard').append('<div>' + e.name + '</div>');
-    })
+           })
 });
 
+//An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $(document).on('click', "#submit", function(){
     let newEmployee = {
         name: $('#name').val(),
-        officeNumber: $('#officenumber').val(),
+        officeNumber: $('#officeNumber').val(),
         phone: $('#phone').val()
     }
     employeeList.push(newEmployee);
     console.log (employeeList);
     $('#dashboard').empty();
-    alert("Employee added")
+    alert("Employee added!!!")
+        
 });
 
 
 
 
-//A `View` option that displays all employee info
+
 
 // const view = function() {
 //     let print = '';
