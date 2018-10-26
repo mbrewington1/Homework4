@@ -1,5 +1,5 @@
 $('#add').on('click', function(){
-   
+   // hey!
     $('#dashboard').empty();
     $('#dashboard').append('<div><input id="name" placeholder="Name"/></div>');
     $('#dashboard').append('<div><input id="officeNumber" placeholder="Office Number"/></div>');
@@ -11,13 +11,32 @@ $('#add').on('click', function(){
 //A `View` option that displays all employee info
 $("#view").on('click', function(){
     $('#dashboard').empty();
-    employeeList.forEach(e =>{
-        $('#dashboard').append('<div>' + e.name + '</div>');
-           })
+
+    for(let i = 0; i < employeeList.length; i++ ){
+
+        const card = $('<div>').addClass('card'); // create the reference to the main card
+        const cardBody = $('<div>').addClass('card-body'); // create reference to card body
+
+        // build the dynamic employee info string
+        const employeeInfo = `<p>${employeeList[i].name}</p><p>Office Number: ${employeeList[i].officeNum}</p><p>Phone Number: ${employeeList[i].phoneNum}</p>`;
+
+        // add employee info HTML string to the card body
+        cardBody.html(employeeInfo);
+
+        // add the card body inside of the main card element
+        card.append(cardBody);
+
+        // display in the dashboard
+        $('#dashboard').append(card);
+         
+    }
+      
+    
+           
 });
 
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
-$(document).on('click', "#submit", function(){
+$('#submit').on('click', function(){
     let newEmployee = {
         name: $('#name').val(),
         officeNumber: $('#officeNumber').val(),
