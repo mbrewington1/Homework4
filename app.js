@@ -1,39 +1,48 @@
+let choice = '';
+const hideform = function () {
+    $("#form").hide();
+}
+hideform();
+
 //A `View` option that displays all employee info
 $("#view").on('click', function () {
-    $('#dashboard').empty();
-
+       let employeeInfo = '';
     for (let i = 0; i < employeeList.length; i++) {
-
-        const card = $('<div>').addClass('card'); // create the reference to the main card
-        const cardBody = $('<div>').addClass('card-body'); // create reference to card body
+        console.log(employeeList[i]);
 
         // build the dynamic employee info string
-        const employeeInfo = `<p>${employeeList[i].name}</p><p>Office Number: ${employeeList[i].officeNum}</p><p>Phone Number: ${employeeList[i].phoneNum}</p>`;
+        employeeInfo += `<div class="card card-body"><p>${employeeList[i].name}</p><p>Office Number: ${employeeList[i].officeNum}</p><p>Phone Number: ${employeeList[i].phoneNum}</p></div>`;
 
-        // add employee info HTML string to the card body
-        cardBody.html(employeeInfo);
-
-        // add the card body inside of the main card element
-        card.append(cardBody);
-
-        // display in the dashboard
-        $('#dashboard').append(card);
-
-    }
+        }
+    // display in the dashboard
+    $('#dashboard').html(employeeInfo);
+    console.log(employeeInfo);
 });
 
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $('#add').on('click', function () {
     // hey!
+    let choice = 'add';
     $('#dashboard').empty();
-    $('#dashboard').append('<div><input id="name" placeholder="Name"/></div>');
-    $('#dashboard').append('<div><input id="officeNumber" placeholder="Office Number"/></div>');
-    $('#dashboard').append('<div><input id="phone" placeholder="Phone Number"/></div>');
-    $('#dashboard').append('<div><button id="submit">Submit</button></div>');
+    $('#form').show();
 
 });
-
-$('#submit').on('click', function () {
+const switcher = function (event) {
+    event.preventDefault();
+    switch (choice) {
+        case 'add':
+            add();
+            console.log('switcher is working');
+            break;
+        case 'verify':
+            break;
+        case 'update':
+            break;
+        case 'delete':
+            break;
+    }
+}
+const add = function () {
     let newEmployee = {
         name: $('#name').val(),
         officeNumber: $('#officeNum').val(),
@@ -45,8 +54,8 @@ $('#submit').on('click', function () {
     view();
     alert("Employee added!!!")
 
-});
-
+};
+$('#submit').on('click', switcher);
 
 
 
