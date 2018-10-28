@@ -6,14 +6,14 @@ hideform();
 
 //A `View` option that displays all employee info
 $("#view").on('click', function () {
-       let employeeInfo = '';
+    let employeeInfo = '';
     for (let i = 0; i < employeeList.length; i++) {
         console.log(employeeList[i]);
 
         // build the dynamic employee info string
         employeeInfo += `<div class="card card-body"><p>${employeeList[i].name}</p><p>Office Number: ${employeeList[i].officeNum}</p><p>Phone Number: ${employeeList[i].phoneNum}</p></div>`;
 
-        }
+    }
     // display in the dashboard
     $('#dashboard').html(employeeInfo);
     console.log(employeeInfo);
@@ -21,13 +21,15 @@ $("#view").on('click', function () {
 
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $('#add').on('click', function () {
-    // hey!
+    console.log("add button working");
     let choice = 'add';
     $('#dashboard').empty();
     $('#form').show();
 
 });
+
 const switcher = function (event) {
+    console.log("switcher method");
     event.preventDefault();
     switch (choice) {
         case 'add':
@@ -48,16 +50,18 @@ const add = function () {
         officeNumber: $('#officeNum').val(),
         phone: $('#phoneNum').val()
     }
+ 
+    alert("Name added!!");
     employeeList.push(newEmployee);
-    console.log(employeeList);
-    $('#dashboard').empty();
-    view();
-    alert("Employee added!!!")
-
+            console.log(employeeList);
+            $('#dashboard').empty();
 };
+
+
 $('#submit').on('click', switcher);
 
 
+    // view();
 
 // // //A `Verify` option that allows users to input a name and renders `yes` if the employee exists and `no` otherwise.
 // $('#submit').on('click', function () {
@@ -66,8 +70,16 @@ $('#submit').on('click', switcher);
 //     if (x=="") {
 //         alert("Please enter name or I can't verify!!!");
 //         return false;
+//         validateForm() 
+//             prompt: "Enter employee name to verify!";
+//             var x = document.forms["myForm"]["fname"].value;
+//             if (x == "") {
+//                 alert("Yes!! Name verified!!");
+//                 return false;
+//             }
 //     }
 // } 
+
 
 // //An `Update` option that allows the user to input name, office number, and phone number and updates the office number and phone number of the employee that matches the input name, and then renders the updated employee list.
 // $('#submit').on('click', function () {
