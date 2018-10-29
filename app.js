@@ -5,7 +5,7 @@ const hideform = function () {
 hideform();
 
 //A `View` option that displays all employee info
-$("#view").on('click', function () {
+const view= function () {
     let employeeInfo = '';
     for (let i = 0; i < employeeList.length; i++) {
         console.log(employeeList[i]);
@@ -17,12 +17,12 @@ $("#view").on('click', function () {
     // display in the dashboard
     $('#dashboard').html(employeeInfo);
     console.log(employeeInfo);
-});
+};
 
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $('#add').on('click', function () {
     console.log("add button working");
-    let choice = 'add';
+    choice = 'add';
     $('#dashboard').empty();
     $('#form').show();
 
@@ -30,6 +30,7 @@ $('#add').on('click', function () {
 
 const switcher = function (event) {
     console.log("switcher method");
+    
     event.preventDefault();
     switch (choice) {
         case 'add':
@@ -45,21 +46,24 @@ const switcher = function (event) {
     }
 }
 const add = function () {
-    let newEmployee = {
-        name: $('#name').val(),
-        officeNumber: $('#officeNum').val(),
-        phone: $('#phoneNum').val()
-    }
+    
+        const name= $('#name').val();
+        const officeNumber= $('#officeNumber').val();
+        const phone= $('#phone').val();
+    
  
     alert("Name added!!");
-    employeeList.push(newEmployee);
+    employeeList.push({
+        name:name,
+        officeNum:officeNumber,
+        phoneNum:phone
+    });
+    view();
             console.log(employeeList);
-            $('#dashboard').empty();
 };
 
-
 $('#submit').on('click', switcher);
-
+$('#view').on('click', view);
 
     // view();
 
