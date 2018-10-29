@@ -22,6 +22,7 @@ const view= function () {
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $('#add').on('click', function () {
     choice = 'add';
+    console.log(choice, "in add");
     $('#dashboard').empty();
     $('#form').show();
 
@@ -35,8 +36,7 @@ $('#form').show();
 $('#hideme').hide();
 })
 const switcher = function (event) {
-    console.log("switcher method");
-    
+   
     event.preventDefault();
     switch (choice) {
         case 'add':
@@ -46,8 +46,10 @@ const switcher = function (event) {
             verify();
             break;
         case 'update':
+            update();  
             break;
         case 'delete':
+            remove();
             break;
     }
 }
@@ -86,6 +88,37 @@ const verify = function () {
     };
 
 
+function update(){
+ 
+    const employee = $('#name').val();
+ 
+    let employeeIndex ;
+    employeeList.forEach((e, index) => { 
+        if(e.name === employee){
+            employeeIndex = index;
+        }
+    })
+   
+    employeeList[employeeIndex].officeNum = $('#officeNumber').val();
+    employeeList[employeeIndex].phoneNum = $('#phone').val();
+    $('#form').hide();
+    view();
+}
+
+function remove () {
+    const employee = $('#name').val();
+ 
+    let employeeIndex ;
+    employeeList.forEach((e, index) => { 
+        if(e.name === employee){
+            employeeIndex = index;
+        }
+    })
+    employeeList.splice(employeeIndex, 1);
+    $('#form').hide();
+    view();
+
+}
 
 // //An `Update` option that allows the user to input name, office number, and phone number and updates the office number and phone number of the employee that matches the input name, and then renders the updated employee list.
 $('#update').on('click', function () {
@@ -97,17 +130,6 @@ $('#update').on('click', function () {
 
 // //A `Delete` option that deletes the employee with the matching name and then renders the updated employee list.
 
-const remove = function () {
-    const name= $('#name').val();
-    // let answer='no';
-    // for (let i = 0; i < employeeList.length; i++) {
-    //     console.log(employeeList[i]);
-    //     if (employeeList[i].name==name){
-    //         answer='yes';
-    //     }
-    // }
-    // $('#dashboard').html(answer);
-    };
 
     $('#delete').on('click', function () {
         choice = 'delete';
