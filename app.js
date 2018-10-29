@@ -21,13 +21,19 @@ const view= function () {
 
 //An `Add` option that allows users to input name, office number, and phone number and then renders the updated employee list.
 $('#add').on('click', function () {
-    console.log("add button working");
     choice = 'add';
     $('#dashboard').empty();
     $('#form').show();
 
 });
 
+
+$('#verify').on('click', function () {
+choice='verify';
+$('#dashboard').empty();
+$('#form').show();
+$('#hideme').hide();
+})
 const switcher = function (event) {
     console.log("switcher method");
     
@@ -35,9 +41,9 @@ const switcher = function (event) {
     switch (choice) {
         case 'add':
             add();
-            console.log('switcher is working');
             break;
         case 'verify':
+            verify();
             break;
         case 'update':
             break;
@@ -65,58 +71,47 @@ const add = function () {
 $('#submit').on('click', switcher);
 $('#view').on('click', view);
 
-    // view();
 
-// // //A `Verify` option that allows users to input a name and renders `yes` if the employee exists and `no` otherwise.
-// $('#submit').on('click', function () {
-//     prompt('Please input the name you would like to verify.');
-//     let name=document.employeeList["employeeList"] ["name"].val;
-//     if (x=="") {
-//         alert("Please enter name or I can't verify!!!");
-//         return false;
-//         validateForm() 
-//             prompt: "Enter employee name to verify!";
-//             var x = document.forms["myForm"]["fname"].value;
-//             if (x == "") {
-//                 alert("Yes!! Name verified!!");
-//                 return false;
-//             }
-//     }
-// } 
+// //A `Verify` option that allows users to input a name and renders `yes` if the employee exists and `no` otherwise.
+const verify = function () {
+    const name= $('#name').val();
+    let answer='no';
+    for (let i = 0; i < employeeList.length; i++) {
+        console.log(employeeList[i]);
+        if (employeeList[i].name==name){
+            answer='yes';
+        }
+    }
+    $('#dashboard').html(answer);
+    };
+
 
 
 // //An `Update` option that allows the user to input name, office number, and phone number and updates the office number and phone number of the employee that matches the input name, and then renders the updated employee list.
-// $('#submit').on('click', function () {
-//     const Update = function () {
-//         let name = $('#name').val();
-//         let officenumber = $('#officeNum').val();
-//         let phonenumber = $('#phoneNum').val();
-//         employeeList.push({
-//             name: name,
-//             officeNum: officenumber,
-//             phoneNum: phonenumber
-//         });
-//         view();
-//         event.preventDefault();
-//         console.log(employeeList);
-//         console.log(name);
-//     }
-// });
+$('#update').on('click', function () {
+    choice = 'update';
+    $('#dashboard').empty();
+    $('#form').show();
+
+});
 
 // //A `Delete` option that deletes the employee with the matching name and then renders the updated employee list.
 
-// const delete = function() {
-//     let name=$('#name').val();
-//     let officenumber=$('#officeNum').val();
-//     let phonenumber=$('#phoneNum').val();
-//     employeeList.push({
-//         name: name,
-//         officeNum: officenumber,
-//         phoneNum: phonenumber
-//     });
-//     view();
-//     event.preventDefault();
-//     console.log (employeeList);
-//     console.log (name);
-// }
-// $('#submit').on('click',Delete);
+const remove = function () {
+    const name= $('#name').val();
+    // let answer='no';
+    // for (let i = 0; i < employeeList.length; i++) {
+    //     console.log(employeeList[i]);
+    //     if (employeeList[i].name==name){
+    //         answer='yes';
+    //     }
+    // }
+    // $('#dashboard').html(answer);
+    };
+
+    $('#delete').on('click', function () {
+        choice = 'delete';
+        $('#dashboard').empty();
+        $('#form').show();
+    $('#hideme').hide();
+    });
